@@ -1,0 +1,56 @@
+const CMS_USER_API = process.env.CMS_SERVICE;
+const DISPLAY_SERVICE_API = process.env.DISPLAY_SERVICE;
+const PROFILE_SERVICE_API = process.env.PROFILE_SERVICE;
+const SUBSCRIPTION_SERVICE_API = process.env.SUBSCRIPTION_SERVICE;
+const CONTENT_SERVICE_API = process.env.CONTENT_SERVICE;
+const PROMOCODE_SERVICE_API = process.env.PROMOCODE_SERVICE;
+const EPIN_SERVICE_API = process.env.EPIN_SERVICE;
+const NOTIFICATION_SERVICE_API = process.env.NOTIFICATION_SERVICE;
+
+//Akamai
+
+const AKAMAI_HOST = process.env.AKAMAI_HOST;
+const AKAMAI_DOMAIN_NAME = process.env.AKAMAI_DOMAIN_NAME;
+const AKAMAI_ACCESS_KEY = process.env.AKAMAI_ACCESS_KEY;
+const AKAMAI_USER_NAME = process.env.AKAMAI_USER_NAME;
+const AKAMAI_PASSWORD = process.env.AKAMAI_PASSWORD;
+const AKAMAI_CPCODE = process.env.AKAMAI_CPCODE;
+const AKAMAI_FILE_PATH = process.env.AKAMAI_FILE_PATH;
+
+const AKAMAI_CONFIG = {
+  hostname: process.env.AKAMAI_HOST,
+  keyName: process.env.AKAMAI_USER_NAME,
+  key: process.env.AKAMAI_ACCESS_KEY,
+  cpCode: process.env.AKAMAI_CPCODE,
+  ssl: false,
+};
+
+const REQUEST_HEADER = {
+  "Content-Type": "application/json",
+};
+const ODATA_REQUEST_HEADER = {
+  Accept: "appliction/xml;odata=verbose",
+  "Content-Type": "application/xml;odata=verbose",
+};
+
+export {
+  CMS_USER_API,
+  REQUEST_HEADER,
+  ODATA_REQUEST_HEADER,
+  DISPLAY_SERVICE_API,
+  PROFILE_SERVICE_API,
+  SUBSCRIPTION_SERVICE_API,
+  CONTENT_SERVICE_API,
+  PROMOCODE_SERVICE_API,
+  EPIN_SERVICE_API,
+  NOTIFICATION_SERVICE_API,
+  //akamai
+  AKAMAI_HOST,
+  AKAMAI_DOMAIN_NAME,
+  AKAMAI_ACCESS_KEY,
+  AKAMAI_USER_NAME,
+  AKAMAI_PASSWORD,
+  AKAMAI_CPCODE,
+  AKAMAI_FILE_PATH,
+  AKAMAI_CONFIG
+};

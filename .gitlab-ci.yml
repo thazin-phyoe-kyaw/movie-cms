@@ -1,0 +1,41 @@
+
+image: nnsp/pipeline-runner:v0.2
+
+stages:
+  - build_dev
+  - deploy_dev
+
+before_script:
+  - 'which ssh-agent || ( apk add --update openssh git -q )'
+  - eval $(ssh-agent -s)
+  - echo "$DEV_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -> /dev/null #add ssh key
+
+build_dev:
+  stage: build_dev
+  script: 
+    - ECR=730136844320.dkr.ecr.us-east-1.amazonaws.com 
+    - REPO=cms-service
+    - AWS_REGION=us-east-1
+    - aws s3 cp s3://mahar-new-develpment-env/env-cms-frontend-dev .env # add env
+    - $(aws ecr get-login --no-include-email --region $AWS_REGION) # login to ECR
+    - docker build . --file Dockerfile --tag $ECR/$REPO:frontend
+    - docker push $ECR/$REPO:frontend
+  tags:
+    - mahar-runner
+  only:
+    - dev
+
+deploy_dev:
+  stage: deploy_dev
+  script:
+    - AWS_REGION=us-east-1
+    - ECR=730136844320.dkr.ecr.us-east-1.amazonaws.com
+    - REPO=cms-service
+    - ssh $USER@$CMS_SERVER -t "cd /home/ubuntu/devops/cms/ && bash deploy.sh"
+  tags:
+    - mahar-runner
+  only:
+    - dev
+
+
+
